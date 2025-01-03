@@ -1,0 +1,17 @@
+Question - DAX to find "Premium Customer" From orders data. Premium Customer are those whose total sales value is more than customer average order value
+
+DAX- 
+Measure 1 : 
+
+Total Sales = SUM(Orders[Sales])
+
+
+Measure 2 :
+
+Premium Customer = 
+VAR TotalSales = SUMMARIZE(ALL('Dim Product'),'Dim Product'[Product ID],"Total_sales",[Total Sales])
+VAR FinalAvgSales = AVERAGEX(TotalSales,[Total_sales])
+
+Return
+IF([Total Sales]>FinalAvgSales,[Total Sales],BLANK())
+
